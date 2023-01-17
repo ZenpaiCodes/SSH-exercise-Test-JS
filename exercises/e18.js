@@ -6,7 +6,22 @@ import { data } from "../data/data";
 
 export function getGreatestDiscoveryYear(data) {
   // Your code goes here...
-  // feel free to import your `maxBy` or `minBy` methods from previous lessons
+  const asteroids = data.asteroids;
+  const asteroidsByYear = asteroids.reduce((acc, curr) => {
+    const year = curr.discoveryYear;
+    if (!acc[year]) {
+      acc[year] = 0;
+    }
+    acc[year]++;
+    return acc;
+  }, {});
+  const greatestDiscoveryYear = Object.keys(asteroidsByYear).reduce((acc, curr) => {
+    if (asteroidsByYear[curr] > acc) {
+      acc = curr;
+    }
+    return acc;
+  }, 0);
+  return greatestDiscoveryYear;
 }
 
 // === TEST YOURSELF ===
