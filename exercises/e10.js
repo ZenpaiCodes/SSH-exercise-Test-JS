@@ -8,7 +8,7 @@ export function getAsteroidDataByName(data, asteroidName) {
   // Your code goes here...
   const asteroids = data.asteroids;
   const asteroid = asteroids.filter(asteroid => asteroid.name === asteroidName);
-  return asteroid;
+  return asteroid[0];
 }
 
 

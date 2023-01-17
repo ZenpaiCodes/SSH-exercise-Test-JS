@@ -7,21 +7,19 @@ import { data } from "../data/data";
 export function getGreatestDiscoveryYear(data) {
   // Your code goes here...
   const asteroids = data.asteroids;
-  const asteroidsByYear = asteroids.reduce((acc, curr) => {
-    const year = curr.discoveryYear;
-    if (!acc[year]) {
-      acc[year] = 0;
+  const asteroidsYears = asteroids.map(asteroid => asteroid.discoveryYear);
+  const asteroidsYearsCount = asteroidsYears.reduce((acc, curr) => {
+    if (typeof acc[curr] == 'undefined') {
+      acc[curr] = 1;
+    } else {
+      acc[curr] += 1;
     }
-    acc[year]++;
     return acc;
   }, {});
-  const greatestDiscoveryYear = Object.keys(asteroidsByYear).reduce((acc, curr) => {
-    if (asteroidsByYear[curr] > acc) {
-      acc = curr;
-    }
-    return acc;
-  }, 0);
-  return greatestDiscoveryYear;
+  const asteroidsYearsCountArray = Object.entries(asteroidsYearsCount);
+  const asteroidsYearsCountArraySorted = asteroidsYearsCountArray.sort((a, b) => b[1] - a[1]);
+  const greatestDiscoveryYear = asteroidsYearsCountArraySorted[0][0];
+  return +greatestDiscoveryYear;
 }
 
 // === TEST YOURSELF ===
